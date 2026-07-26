@@ -51,7 +51,7 @@ LockWorkStation()
 
 # Architecture du projet
 
-
+````
 NFCGuard
 │
 ├── main.py # Programme principal
@@ -67,7 +67,7 @@ NFCGuard
 │
 └── README.md # Documentation
 
-
+````
 ---
 
 # Configuration nécessaire
@@ -92,67 +92,68 @@ Exemples :
 
 # Python
 
-Version utilisée :
+## Version utilisée :
 
 
 Python 3.12
 
 
-Vérification :
+## Vérification :
 
 ```powershell
 py -3.12 --version
+````
 
 Même si Python 3.14 est installé sur la machine, NFCGuard doit être lancé avec Python 3.12.
 
-Installation
-Installer les dépendances
+---
+# Installation
+## Installer les dépendances
 
 Dans le dossier NFCGuard :
-
+````
 py -3.12 -m pip install -r requirements.txt
-
+````
 Ou manuellement :
-
+````
 py -3.12 -m pip install pyscard pillow pystray
-Fichier requirements.txt
+````
+## Fichier requirements.txt
 
-Créer :
-
-requirements.txt
+Créer : requirements.txt
 
 avec :
-
+````
 pyscard
 pillow
 pystray
-Configuration NFC
+````
+----
 
-Modifier :
+# Configuration NFC
 
-config.py
+Modifier : config.py
 
 Exemple :
-
+````
 AUTHORIZED_UID = "47:98:A7:6F"
 
 TIMEOUT = 3
 
 LOGO = "logo.png"
-AUTHORIZED_UID
-
-Correspond à l'identifiant unique du badge.
+````
+AUTHORIZED_UID correspond à l'identifiant unique du badge.
 
 Exemple :
-
+````
 47:98:A7:6F
-
-Pour récupérer l'UID :
+````
+## Pour récupérer l'UID :
 
 Lancer :
-
+````
 py -3.12 main.py
-
+````
 Présenter le badge.
 
 La console affiche :
@@ -161,13 +162,11 @@ UID détecté : 47:98:A7:6F
 
 Copier cette valeur dans config.py.
 
-TIMEOUT
+## TIMEOUT
 
 Définit le temps avant verrouillage.
 
-Exemple :
-
-TIMEOUT = 3
+Exemple : TIMEOUT = 3
 
 Résultat :
 
@@ -179,78 +178,75 @@ Badge retiré
 
 1
 
-Verrouillage Windows
-LOGO
+Verrouillage Windows 
+
+## LOGO
 
 Chemin du logo affiché.
 
-Exemple :
-
-LOGO = "logo.png"
+Exemple : LOGO = "logo.png"
 
 Le fichier doit être dans le dossier NFCGuard.
 
-Premier lancement
+---
+
+# Premier lancement
 
 Avant le démarrage automatique, tester manuellement :
-
+````
 py -3.12 main.py
-
+````
 Vérifier :
 
-l'icône NFCGuard apparaît ;
-le badge est détecté ;
-le retrait du badge affiche l'écran ;
-le verrouillage fonctionne.
+l'icône NFCGuard apparaît ;     
+le badge est détecté ;  
+le retrait du badge affiche l'écran ;   
+le verrouillage fonctionne.     
 Démarrage automatique Windows
 
-NFCGuard doit être lancé automatiquement à chaque ouverture de session.
+## NFCGuard doit être lancé automatiquement à chaque ouverture de session.
 
-Utiliser :
+### Utiliser : Planificateur de tâches Windows      
 
-Planificateur de tâches Windows
-Création de la tâche
-
-Nom :
-
-NFCGuard
-Déclencheur
-
-Choisir :
-
-À l'ouverture de session
+### Création de la tâche
+````
+Nom : NFCGuard  
+````
+### Déclencheur
+````
+Choisir : À l'ouverture de session
 Action
-
-Programme :
-
-Exemple :
-
-C:\Users\Utilisateur\AppData\Local\Programs\Python\Python312\pythonw.exe
-
-Arguments :
-
+````
+### Programme :
+````
+Exemple : C:\Users\Utilisateur\AppData\Local\Programs\Python\Python312\pythonw.exe
+````
+### Arguments :
+````
 "C:\NFCGuard\main.py"
-
-Démarrer dans :
-
+````
+### Démarrer dans :
+````
 C:\NFCGuard
-Important
+````
+---
+
+# Important
 
 Utiliser :
-
-pythonw.exe
-
-et non :
-
-python.exe
-
+````
+pythonw.exe et non : python.exe
+````
 Différence :
 
-Programme	Résultat
-python.exe	ouvre une console
-pythonw.exe	fonctionnement silencieux
-Utilisation
-Badge présent
+
+python.exe	ouvre une console               
+pythonw.exe	fonctionnement silencieux       
+
+---
+
+
+## Utilisation
 
 Fonctionnement normal :
 
@@ -269,7 +265,7 @@ Après retrait :
 
 Badge retiré
 
-
+````
 +--------------------------+
 |                          |
 |          LOGO            |
@@ -279,7 +275,7 @@ Badge retiré
 |            3             |
 |                          |
 +--------------------------+
-
+````
 
         ↓
 
@@ -309,73 +305,77 @@ Nouvelle lecture du badge
 
 Le lecteur NFC est automatiquement réutilisé.
 
-Dépannage
+---
+# Dépannage
 Le module smartcard manque
 
-Erreur :
-
-ModuleNotFoundError: No module named 'smartcard'
+Erreur : ModuleNotFoundError: No module named 'smartcard'
 
 Solution :
-
+````
 py -3.12 -m pip install pyscard
+````
 Le module PIL manque
 
-Erreur :
-
-ModuleNotFoundError: No module named 'PIL'
+Erreur :`ModuleNotFoundError: No module named 'PIL'
 
 Solution :
-
+````
 py -3.12 -m pip install pillow
+````
 Le lecteur NFC n'est pas détecté
 
 Vérifier :
 
-lecteur branché ;
-pilotes installés ;
+lecteur branché ;       
+pilotes installés ;     
 service Windows Smart Card actif.
 
 Tester :
-
+````
 py -3.12 main.py
-
+````
 Présenter le badge.
 
 Résultat attendu :
-
+````
 UID détecté : XX:XX:XX:XX
+````
 L'icône n'apparaît pas
 
 Vérifier :
 
-utilisation de pythonw.exe ;
-tâche Windows configurée avec utilisateur connecté ;
+utilisation de pythonw.exe ;    
+tâche Windows configurée avec utilisateur connecté ;    
 autorisation des icônes dans la barre système.
-Sécurité
+
+---
+# Sécurité
 
 NFCGuard ne stocke aucune donnée personnelle.
 
 Les seules informations utilisées sont :
 
-UID du badge NFC ;
-configuration locale ;
+UID du badge NFC ;      
+configuration locale ;  
 état de présence du badge.
 
 Aucune donnée n'est envoyée sur Internet.
 
-Améliorations possibles
 
-Évolutions futures :
+---
+# Améliorations possibles
 
-Plusieurs badges autorisés.
-Liste blanche de badges.
-Historique des événements.
-Journal de présence.
-Interface graphique de configuration.
-Installation automatique.
-Service Windows professionnel.
-Signature numérique de l'application.
+## Évolutions futures :
+
+Plusieurs badges autorisés.     
+Liste blanche de badges.        
+Historique des événements.      
+Journal de présence.    
+Interface graphique de configuration.   
+Installation automatique.       
+Service Windows professionnel.  
+Signature numérique de l'application.   
 Licence
 
 Projet personnel.
