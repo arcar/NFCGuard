@@ -1,0 +1,4 @@
+pyscard
+pillow
+pywin32
+pystray
